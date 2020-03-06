@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+    grpc-server:
+        build: .
+        command: python /app/code/python/helloword/greeter_server.py
+        ports:
+            - 50051:50051
+        volumes:
+            - ../code:/app
+            - ../fonts:/usr/share/fonts/
+        container_name: grpc-server
+        user: "1000"
+        stdin_open: true
+        tty: true
+    grpc-client:
+        build: .
+        command: python /app/code/python/helloword/greeter_client.py
+        volumes:
+            - ../code:/app
+            - ../fonts:/usr/share/fonts/
+        container_name: grpc-client
+        user: "1000"
+        stdin_open: true
+        tty: true
